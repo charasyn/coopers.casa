@@ -1,37 +1,22 @@
-## Welcome to GitHub Pages
+# Main page
+Hello! This is my website. It's a WIP and hopefully some neat things will be up here soon!
 
-You can use the [editor on GitHub](https://github.com/charasyn/coopers.casa/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Me
+I go by many names:
+- Cooper Harasyn
+- charasyn
+- cooprocks123e
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I like the following things:
+- Retro video games
+- Low-level coding (Assembly/C)
+- Hacking/exploitation of systems
 
-### Markdown
+As the perfect intersection of these three, see https://www.youtube.com/watch?v=Ixu8tn__91E
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## What kinds of things?
+Many things! Small technical articles, useful calculators, gadgets, and other tiny apps, etc...
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/charasyn/coopers.casa/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+List of things that I want to integrate into this page:
+- Triangle solver given aspect ratio and hypotenuse length https://bl.ocks.org/charasyn/29b0133080e88e345fcbb2f685fccc0c
+  - Sometimes you just need to know the width and height of a 24" 16x9 monitor (or whatever size/aspect ratio) 
