@@ -322,7 +322,7 @@ class CooplePlayer {
         boxes += '🟧';
       }
     }
-    let clipText = `coople ${this.gameDate} ${guessChar}/6\n\n${boxes}\n\nhttp://coopers.casa/coople/index.html`;
+    let clipText = `coople ${this.gameDate} ${guessChar}/6\n\n${boxes}\n\nhttps://coopers.casa/coople/`;
     navigator.clipboard.writeText(clipText).then(function() {
       /* clipboard successfully set */
     }, function() {
