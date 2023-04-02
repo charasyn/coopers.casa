@@ -17,6 +17,5 @@ As the perfect intersection of these three, [see this collaboration I did with S
 ## What kinds of things?
 Many things! Small technical articles, useful calculators, gadgets, and other tiny apps, etc...
 
-List of things that I want to integrate into this page:
-- [Triangle solver given aspect ratio and hypotenuse length](https://bl.ocks.org/charasyn/29b0133080e88e345fcbb2f685fccc0c)
-  - Sometimes you just need to know the width and height of a 24" 16x9 monitor (or whatever size/aspect ratio) 
+## Tools
+Click this link to see some [tools](tools) I've made.

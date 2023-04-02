@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EarthBound Window Register Address Calculator</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      label {
+        display: block;
+        width: auto;
+        text-align: right;
+      }
+      button {
+        display: block;
+        width: auto;
+        margin: auto;
+      }
+      .iobox {
+        border: 1px solid black;
+        padding: 6pt;
+        max-width: 10in;
+      }
+      .inputerror {
+        color: red;
+      }
+      .inputnoerror {
+        color: black;
+      }
+      .outputaddr {
+        font-size: 13pt;
+        font-family: 'Monaco', 'Meslo LG S', 'Cascadia Code', 'Cascadia Mono', 'Courier New', Courier, monospace;
+        border: 1px solid black;
+        border-radius: 3pt;
+        padding: 3pt;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      This will help you determine where in memory you can find the registers for a given window.
+      <br>
+      Steps:
+      <ol>
+        <li>Input the window number you are interested in (ex. window 1 is the main text window, window 14 is main battle window)</li>
+        <li>Press enter</li>
+        <li>Go to the address of the existence table entry in the emulator's memory viewer, and record the value there (0-7)</li>
+        <li>Enter the value from the existence table into the "Window Stats Index" input</li>
+        <li>Press enter</li>
+        <li>The address of the window registers should be populated</li>
+      </ol>
+    </p>
+    <div class="iobox">
+      <p>
+        Current Window: <input type="text" class="inputnoerror" onchange="form_update_curwin()" id="input_curwin" min="0" max="57" value="0">
+      </p><p>
+        Address of existence table entry: <span class="outputaddr" id="output_addrexistence">$XXXXXX</span>
+      </p><p>
+        At that address, you will find the index to the window stats table for this window.
+      </p>
+    </div>
+    <div class="iobox">
+      <p>
+        Window Stats Index: <input type="text" class="inputnoerror" onchange="form_update_winstat()" id="input_winstat" min="0" max="7" value="0">
+      </p><p>
+        Address of window stat struct: <span class="outputaddr" id="output_addrwinstat">$XXXXXX</span>
+      </p><p>
+        Address of window registers: <span class="outputaddr" id="output_addrwinstatregs">$XXXXXX</span>
+      </p><p>
+      </p>
+    </div>
+    <script>
+      function form_setError(elem, err) {
+        elem.className = err ? "inputerror" : "inputnoerror";
+      }
+      function form_update_curwin() {
+        const input_curwin = document.getElementById('input_curwin');
+        const output_addrexistence = document.getElementById('output_addrexistence');
+        const curwin = parseInt(input_curwin.value);
+        const curwin_error = isNaN(curwin) || curwin < 0 || curwin >= 58;
+        form_setError(input_curwin, curwin_error);
+        if (!curwin_error) {
+          const addr = 0x7E88E4 + curwin * 2;
+          const strout = '$' + addr.toString(16).toUpperCase();
+          output_addrexistence.innerText = strout;
+        }
+      }
+      function form_update_winstat() {
+        const input_winstat = document.getElementById('input_winstat');
+        const output_addrwinstat = document.getElementById('output_addrwinstat');
+        const output_addrwinstatregs = document.getElementById('output_addrwinstatregs');
+        const winstat = parseInt(input_winstat.value);
+        const winstat_error = isNaN(winstat) || winstat < 0 || winstat >= 8;
+        form_setError(input_winstat, winstat_error);
+        if (!winstat_error) {
+          const addrwinstat = 0x7E8650 + winstat * 0x52;
+          const addrwinstatregs = addrwinstat + 0x17;
+          output_addrwinstat.innerText = '$' + addrwinstat.toString(16).toUpperCase();
+          output_addrwinstatregs.innerText = '$' + addrwinstatregs.toString(16).toUpperCase();
+        }
+      }
+      form_update_curwin();
+      form_update_winstat();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Triangle solver given aspect ratio and hypotenuse length</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            label {
+                display: block;
+                width: auto;
+                text-align: right;
+            }
+            button {
+                display: block;
+                width: auto;
+                margin: auto;
+            }
+            table {
+                border: 1px solid black;
+            }
+            .inputerror {
+                color: red;
+            }
+            .inputnoerror {
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <p>
+            Given a right triangle with aspect ratio Ra : Rb and hypotenuse length C,
+            calculate the side lengths A and B.
+        </p>
+        <p>
+            This can help you calculate a screen's width and height. Put the monitor size (ex. 24") as C,
+            and the aspect ratio as Ra : Rb (ex. 16:9).
+        </p>
+        <table>
+            <tr><td><label>Ra:</label></td><td><input type="number" class="inputnoerror" onchange="form_update()" id="input_Ra" min="1" value="16"></td></tr>
+            <tr><td><label>Rb:</label></td><td><input type="number" class="inputnoerror" onchange="form_update()" id="input_Rb" min="1" value="9"></td></tr>
+            <tr><td><label>C: </label></td><td><input type="number" class="inputnoerror" onchange="form_update()" id="input_C"  min="1" value="24"></td></tr>
+            <tr><td colspan="2"><button onclick="form_update()">Calculate</button></td></tr>
+            <tr><td><label>A: </label></td><td><input type="number" id="output_A" disabled></td></tr>
+            <tr><td><label>B: </label></td><td><input type="number" id="output_B" disabled></td></tr>
+        </table>
+        <script>
+            function form_setError(elem, err) {
+                elem.className = err ? "inputerror" : "inputnoerror";
+            }
+            function form_getInputs() {
+                const input_Ra = document.getElementById('input_Ra');
+                const input_Rb = document.getElementById('input_Rb');
+                const input_C = document.getElementById('input_C');
+                
+                const Ra = parseFloat(input_Ra.value);
+                const Rb = parseFloat(input_Rb.value);
+                const C = parseFloat(input_C.value);
+
+                let err = false;
+                if (isNaN(Ra) || Ra <= 0) { form_setError(input_Ra, true); err = true; } else { form_setError(input_Ra, false); }
+                if (isNaN(Rb) || Rb <= 0) { form_setError(input_Rb, true); err = true; } else { form_setError(input_Rb, false); }
+                if (isNaN(C)  || C  <= 0) { form_setError(input_C,  true); err = true; } else { form_setError(input_C,  false); }
+                if (err) return undefined;
+
+                return {
+                    Ra: Ra,
+                    Rb: Rb,
+                    C:  C,
+                };
+            }
+            function form_setOutputs(vals) {
+                const output_A = document.getElementById('output_A');
+                const output_B = document.getElementById('output_B');
+
+                let A = "";
+                let B = "";
+                if (vals) {
+                    A = vals.A;
+                    B = vals.B;
+                }
+
+                output_A.value = A;
+                output_B.value = B;
+            }
+            function form_update() {
+                const inputs = form_getInputs();
+                if (!inputs) {
+                    form_setOutputs(undefined);
+                    return;
+                }
+
+                const Ra = inputs.Ra;
+                const Rb = inputs.Rb;
+                const C  = inputs.C;
+                const R  = Ra/Rb;
+
+                const B = C * Math.sqrt(1 / (R*R + 1));
+                const A = B*R;
+                
+                form_setOutputs({
+                    A: Math.round(A * 1000) / 1000,
+                    B: Math.round(B * 1000) / 1000,
+                });
+            }
+            form_update();
+        </script>
+    </body>
+</html>
